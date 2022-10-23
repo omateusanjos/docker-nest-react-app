@@ -14,13 +14,17 @@ export class TransactionsService {
 
   async create(createTransactionDto: CreateTransactionDto): Promise<any> {
     try {
-      await this.transactionRepository.save(createTransactionDto);
-      return { message: 'Transaction created', status: 201 };
+      createTransactionDto.file.forEach(async (transaction) => {
+        this.transactionRepository.create(transaction);
+      }
+      );
+      return { message: 'Transactions created', status: 201 };
     }
-
     catch (error) {
+      console.log(error);
       return error;
     }
+
   }
 
   async findAll(): Promise<Transaction[]> {

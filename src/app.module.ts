@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionsController } from './transactions/transactions.controller';
 
+
 const TypeORMConfig = TypeOrmModule.forRoot({
   type: 'postgres',
   host: 'localhost',
@@ -20,7 +21,7 @@ const TypeORMConfig = TypeOrmModule.forRoot({
 @Module({
   imports: [
     TypeORMConfig,
-    TransactionsModule,
+    TransactionsModule
   ],
   controllers: [AppController, TransactionsController],
   providers: [AppService],

@@ -15,40 +15,34 @@ export class TransactionsService {
   async create(createTransactionDto: CreateTransactionDto): Promise<any> {
     try {
       createTransactionDto.file.forEach(async (transaction) => {
-        this.transactionRepository.create(transaction);
+        await this.transactionRepository.save(transaction);
       }
       );
       return { message: 'Transactions created', status: 201 };
     }
     catch (error) {
-      console.log(error);
       return error;
     }
-
   }
 
   async findAll(): Promise<Transaction[]> {
     try {
-      const transactions = await this.transactionRepository.find();
-      return transactions;
+      return await this.transactionRepository.find();
     }
     catch (error) {
       return error;
     }
-
   }
 
-  async findOne(id: number) {
+  async findOne(seller: string) {
     try {
-      const transaction = await this.transactionRepository.findOne({
-        where: { id },
+      return await this.transactionRepository.find({
+        where: { seller },
       });
-      return transaction;
     }
     catch (error) {
       return error;
     }
-
   }
 
   async update(id: number, updateTransactionDto: UpdateTransactionDto) {
@@ -62,11 +56,11 @@ export class TransactionsService {
 
   async remove(id: number) {
     try {
-      const transaction = await this.transactionRepository.findBy({ id });
-      if (transaction) {
-        await this.transactionRepository.remove(transaction);
-        return transaction;
-      }
+      await this.transactionRepository.findBy({ id }).then((transaction) => {
+        if (transaction) {
+          return this.transactionRepository.delete(id);
+        }
+      });
 
       return { message: 'Transaction not found', status: 404 };
     }

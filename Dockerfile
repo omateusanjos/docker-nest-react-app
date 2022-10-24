@@ -1,11 +1,7 @@
 FROM node:18.1.0-alpine3.14
 
-WORKDIR /usr/src/app
+RUN yarn install -g @nestjs/cli@8.0.0
 
-COPY package.json .
+user node 
 
-RUN yarn
-
-COPY . .
-
-CMD ["yarn", "start"]
+WORKDIR /home/node/app

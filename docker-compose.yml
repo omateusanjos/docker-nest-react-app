@@ -2,7 +2,7 @@ version: '3.3'
 services:
   database:
     container_name: postgres
-    image: postgres:latest
+    image: postgres:14.5-alpine
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -23,9 +23,19 @@ services:
     ports:
       - ${API_PORT}:${API_PORT}
     volumes:
-      - ./src
+      - .:/app
     depends_on:
       - database
+    links:
+      - database
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - API_PORT=${API_PORT}
+      - NODE_ENV=${NODE_ENV}
 
   frontend:
     container_name: hubla-front-challenge

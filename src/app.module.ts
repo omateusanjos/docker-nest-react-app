@@ -4,7 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionsController } from './transactions/transactions.controller';
-import { TransactionsService } from './transactions/transactions.service';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
 
 
 const TypeORMConfig = TypeOrmModule.forRoot({
@@ -22,10 +23,11 @@ const TypeORMConfig = TypeOrmModule.forRoot({
 @Module({
   imports: [
     TypeORMConfig,
-    TransactionsModule
+    TransactionsModule,
+    AuthModule,
   ],
   controllers: [AppController, TransactionsController],
-  providers: [AppService, TransactionsService],
+  providers: [AppService, AuthService],
 })
 
 

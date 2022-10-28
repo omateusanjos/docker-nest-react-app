@@ -17,7 +17,6 @@ export class ApiKeyStrategy extends PassportStrategy(
             true,
             async (apiKey: string, done: any) => {
                 if (this.authService.validateApiKey(apiKey)) {
-                    console.log('API key validated');
                     done(null, true);
                 }
                 console.log('API key not validated');

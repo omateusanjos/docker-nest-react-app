@@ -4,6 +4,7 @@ import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { Repository } from 'typeorm';
 import { Transaction } from './entities/transaction.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Injectable()
 export class TransactionsService {

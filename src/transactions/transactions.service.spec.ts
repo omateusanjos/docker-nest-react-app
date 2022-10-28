@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './entities/transaction.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { TransactionsController } from './transactions.controller';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 
 describe('TransactionsService', () => {

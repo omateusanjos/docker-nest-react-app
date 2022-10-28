@@ -1,18 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
-import React from "react";
-import { Link } from "react-router-dom";
-import APIHubla from "../../api";
-import { Table } from "../components/Table";
-import useToast from "../hooks/useToast";
-import { FileUploadedFile } from "../types/form";
-import { MockColumns } from "../utils/form";
+import { useQuery } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import APIHubla from '../../api';
+import { Table } from '../components/Table';
+import useToast from '../hooks/useToast';
+import { FileUploadedFile } from '../types/form';
+import { MockColumns } from '../utils/form';
 
 const ContainerList = ({ list }: { list: FileUploadedFile[] }) => (
   <div
     style={{
-      maxHeight: "40rem",
-      overflowY: "auto",
+      maxHeight: '40rem',
+      overflowY: 'auto',
     }}
   >
     <Table data={list} columns={MockColumns} />
@@ -23,7 +23,7 @@ const toUpperCase = (value: string) => value.toUpperCase();
 
 const List = () => {
   const [fetching, setFetching] = React.useState(false);
-  const [value, setValue] = React.useState<string>("");
+  const [value, setValue] = React.useState<string>('');
   const { ToastShow, ToastConfigs } = useToast();
 
   const {
@@ -31,7 +31,7 @@ const List = () => {
     isInitialLoading,
     isFetching,
   } = useQuery<AxiosResponse<FileUploadedFile[]>>(
-    ["list", toUpperCase(value)],
+    ['list', toUpperCase(value)],
     () => APIHubla.get(`/transactions/${toUpperCase(value)}`),
     {
       enabled: fetching,
@@ -39,19 +39,19 @@ const List = () => {
       onSuccess: () => {
         setFetching(false);
         ToastShow({
-          type: "success",
-          message: "Transações carregadas com sucesso",
+          type: 'success',
+          message: 'Transações carregadas com sucesso',
         });
       },
       onError: () => {
         setFetching(false);
         ToastShow({
-          type: "error",
-          message: "Erro ao carregar transações",
+          type: 'error',
+          message: 'Erro ao carregar transações',
         });
       },
-      notifyOnChangeProps: ["data"],
-    }
+      notifyOnChangeProps: ['data'],
+    },
   );
 
   const handleFind = (evt: React.ChangeEvent<HTMLInputElement>) => {

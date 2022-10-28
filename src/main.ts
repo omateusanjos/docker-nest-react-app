@@ -5,8 +5,8 @@ import { AppModule } from './app.module';
 import helmet from 'helmet';
 import { ValidationPipe } from '@nestjs/common';
 
-const configOpenApi = new DocumentBuilder().setTitle('Hubla Back Challenge API')
-  .setDescription('Hubla Back Challenge API')
+const configOpenApi = new DocumentBuilder().setTitle('Hubla Back Challenge APIs')
+  .setDescription('Hubla Back Challenge APIs')
   .setVersion('1.0')
   .build();
 
@@ -21,7 +21,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   });
 
@@ -36,6 +36,8 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }));
-  await app.listen(4000);
+  await app.listen(
+    Number(process.env.API_PORT) ?? 4000,
+  );
 }
 bootstrap();

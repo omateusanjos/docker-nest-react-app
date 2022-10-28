@@ -17,3 +17,13 @@ To get started, just clone or download the repository and run:
 ```
 yarn docker-up
 ```
+
+# URLS
+
+### Local
+
+| CONTAINER | HOST      | PORT  |
+| :-------- | :-------- | :---- |
+| BACKEND   | localhost | 4000  |
+| FRONTEND  | localhost | 3000  |
+| DATABASE  | localhost | 15432 |

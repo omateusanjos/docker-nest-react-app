@@ -1,7 +1,5 @@
 FROM node:18.1.0-alpine3.14
 
-ENV env_name Example
-
 WORKDIR /usr/src/app
 
 COPY package.json .

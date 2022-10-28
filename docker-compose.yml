@@ -10,7 +10,7 @@ services:
     volumes:
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     ports:
-      - ${DB_PORT}:${DB_PORT}
+      - ${DB_PORT_DOCKER}:${DB_PORT}
     restart: unless-stopped
 
   backend:

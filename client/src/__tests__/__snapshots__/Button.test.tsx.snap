@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`
+SubmitButton component should match snapshot 1`] = `
+<div>
+  <button
+    class="text-logo-btn p-2 rounded-lg my-4 font-bold"
+    type="submit"
+  >
+    Submit
+  </button>
+</div>
+`;

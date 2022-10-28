@@ -8,11 +8,11 @@ import { TransactionsController } from './transactions/transactions.controller';
 
 const TypeORMConfig = TypeOrmModule.forRoot({
   type: 'postgres',
-  host: 'localhost',
-  port: 15432,
+  host: 'database',
+  port: 5432,
   username: 'postgres',
   password: 'password',
-  database: 'postgres',
+  database: 'hubla',
   entities: [],
   synchronize: true,
   autoLoadEntities: true,

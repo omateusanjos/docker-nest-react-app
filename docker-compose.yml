@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  database:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'hubla'
+      PGDATA: '/data/postgres'
+    volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+
+  backend:
+    tty: true
+    container_name: hubla-back-challenge
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: backend
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./server:/app
+    depends_on:
+      - database
+
+  frontend:
+    container_name: hubla-front-challenge
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client:/app
+    depends_on:
+      - backend

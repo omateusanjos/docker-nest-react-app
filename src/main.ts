@@ -3,6 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 import helmet from 'helmet';
+import { ValidationPipe } from '@nestjs/common';
 
 const configOpenApi = new DocumentBuilder().setTitle('Hubla Back Challenge API')
   .setDescription('Hubla Back Challenge API')
@@ -30,6 +31,11 @@ async function bootstrap() {
     contentSecurityPolicy: false,
   }));
 
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+  }));
   await app.listen(4000);
 }
 bootstrap();

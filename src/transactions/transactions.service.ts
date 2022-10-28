@@ -21,7 +21,7 @@ export class TransactionsService {
       return { message: 'Transactions created', status: 201 };
     }
     catch (error) {
-      return error;
+      return "Aconteceu algo errado";
     }
   }
 

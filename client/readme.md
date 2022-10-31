@@ -1,4 +1,4 @@
-# Hubla Front Challenge
+# Frontend
 
 This is a starter project for React that uses Vite.js
 
